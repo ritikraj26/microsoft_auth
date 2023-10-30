@@ -109,12 +109,15 @@ AUTH_PASSWORD_VALIDATORS = [
 #Authentication
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 AUTHENTICATION_BACKENDS = ( 
+    'django.contrib.auth.backends.ModelBackend', 
     'social_core.backends.microsoft.MicrosoftOAuth2',
 )
 
-SOCIAL_AUTH_MICROSOFT_OAUTH2_KEY = 'your-microsoft-client-id'
-SOCIAL_AUTH_MICROSOFT_OAUTH2_SECRET = 'your-microsoft-client-secret'
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_MICROSOFT_OAUTH2_KEY = 'ac28f616-20dc-436d-9072-5394ce5fe8cf'
+SOCIAL_AUTH_MICROSOFT_OAUTH2_SECRET = 'dWo8Q~EGCdInWiOwLzJGsGr8HX-aFRc68C8ysbxq'
+# SOCIAL_AUTH_URL_NAMESPACE = 'social'
+LOGIN_REDIRECT_URL = 'home'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
