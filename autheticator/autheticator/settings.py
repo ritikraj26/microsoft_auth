@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'autheticator.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,6 +105,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+#Authentication
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+AUTHENTICATION_BACKENDS = ( 
+    'social_core.backends.microsoft.MicrosoftOAuth2',
+)
+
+SOCIAL_AUTH_MICROSOFT_OAUTH2_KEY = 'your-microsoft-client-id'
+SOCIAL_AUTH_MICROSOFT_OAUTH2_SECRET = 'your-microsoft-client-secret'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
