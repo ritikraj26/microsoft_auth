@@ -37,9 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'core.apps.CoreConfig',
     'social_django',
-    'core',
+    'corsheaders',
+    
+    
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+# AUTH_USER_MODEL = 'core.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'autheticator.urls'
@@ -64,6 +73,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -78,7 +90,7 @@ WSGI_APPLICATION = 'autheticator.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'auth_database',
+        'NAME': 'auth_app',
         'USER': 'ritik',
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
@@ -106,17 +118,30 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-#Authentication
-SOCIAL_AUTH_JSONFIELD_ENABLED = True
-AUTHENTICATION_BACKENDS = ( 
-    'django.contrib.auth.backends.ModelBackend', 
+#Authenticationz
+# SOCIAL_AUTH_JSONFIELD_ENABLED = True
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.azuread.AzureADOAuth2',
     'social_core.backends.microsoft.MicrosoftOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend', 
 )
 
-SOCIAL_AUTH_MICROSOFT_OAUTH2_KEY = 'ac28f616-20dc-436d-9072-5394ce5fe8cf'
-SOCIAL_AUTH_MICROSOFT_OAUTH2_SECRET = 'dWo8Q~EGCdInWiOwLzJGsGr8HX-aFRc68C8ysbxq'
-# SOCIAL_AUTH_URL_NAMESPACE = 'social'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = 'b1ecfa0a-0b7e-44ca-9950-3a3cc1d0a716'
+SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = 'LKF8Q~-.lVHzb-sC0bRZTdAgGAx6Z52gj1jJoaqs'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_AZUREAD_OAUTH2_TENANT = 'common' 
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '875173454365-27c82q6a54801n5sf5sject1k4nrd95t.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
 
 
 # Internationalization
